@@ -686,8 +686,13 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 # Disable the annoying line marks
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
-# Install the Solarized Dark theme for iTerm
-open "${HOME}/.dotfiles/init/Solarized Dark.itermcolors"
+# Install Snazzy Soft theme for iTerm2 via Dynamic Profile
+DYNAMIC_PROFILES_DIR="$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+mkdir -p "$DYNAMIC_PROFILES_DIR"
+ln -sf "${HOME}/.dotfiles/init/iterm-profile.json" "$DYNAMIC_PROFILES_DIR/snazzy-soft.json"
+
+# Set Snazzy Soft as the default profile for new windows
+defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "snazzy-soft-profile-001"
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
