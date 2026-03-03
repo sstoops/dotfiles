@@ -146,6 +146,22 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Terraform Cloud: p10k's terraform segment only reads $TF_WORKSPACE or .terraform/environment.
+# With remote backend there is no .terraform/environment file, so set TF_WORKSPACE from the
+# current workspace before each prompt so the segment can display it.
+function _dotfiles_tf_workspace_precmd() {
+  if [[ -d .terraform ]]; then
+    if [[ ! -r .terraform/environment ]]; then
+      export TF_WORKSPACE=$(terraform workspace show 2>/dev/null)
+    else
+      unset -m TF_WORKSPACE
+    fi
+  else
+    unset -m TF_WORKSPACE
+  fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _dotfiles_tf_workspace_precmd
 
 # Since the Homebrew prefix changes between Intel and M1, we'll store the value and 
 # configure anything requiring homebrew accordingly.
