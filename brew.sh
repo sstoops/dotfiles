@@ -54,6 +54,7 @@ brew install htop
 brew install imagemagick
 brew install lua
 brew install lynx
+brew install node
 brew install p7zip
 brew install pigz
 brew install pv
