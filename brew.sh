@@ -78,6 +78,7 @@ brew install --cask postman
 brew install --cask rectangle
 brew install --cask slack
 brew install --cask sourcetree
+brew install hashicorp/tap/terraform
 brew install --cask visual-studio-code
 
 brew install --cask font-fira-code
